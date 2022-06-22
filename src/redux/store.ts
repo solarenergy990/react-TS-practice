@@ -13,7 +13,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import userReducer from '../redux/user/userReducer';
+import userReducer from './user/userReducer';
 
 import appReducer from './app/reducer';
 import thunk from 'redux-thunk';
@@ -55,3 +55,7 @@ const storeItems = {
 };
 
 export default storeItems;
+
+export type RootState = ReturnType<typeof store.getState>
+
+export type AppDispatch = typeof store.dispatch

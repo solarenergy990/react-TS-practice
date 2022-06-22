@@ -7,12 +7,15 @@ import operations from '../../redux/app/operations';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import s from './ContactForm.module.css';
 
+import { RootState } from '../../redux/store';
+
+
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const dispatch = useDispatch();
-  const contacts = useSelector(state => {
+  const contacts = useSelector((state: RootState) => {
     return state.appState.contacts.items;
   });
 
