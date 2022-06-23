@@ -1,5 +1,7 @@
-import appActions from '../app/actions';
+import appActions from './actions';
 import contactAPI from '../sevice/fetchContactAPI';
+import IContact from '../../interfaces/Contact.interface';
+import { Dispatch } from 'redux';
 
 const {
   addContact,
@@ -11,39 +13,43 @@ const {
   contactFetchError,
 } = appActions;
 
-const postContactOperation = contact => async dispatch => {
-  //   console.log(contact);
-  dispatch(contactFetchStarted());
+
+
+
+
+const postContactOperation = (contact: IContact) => async (dispatch: Dispatch) => {
+    console.log('dispatch in operations :',dispatch);
+  dispatch(contactFetchStarted(true));
   try {
     const result = await contactAPI.postContact(contact);
     console.log('result in post', result);
     dispatch(addContact(contact));
-  } catch (error) {
-    dispatch(contactFetchError(error));
-  } finally {
-    dispatch(contactFetchFinished());
-  }
-};
-
-const getContactOperation = () => async dispatch => {
-  dispatch(contactFetchStarted(true));
-  try {
-    const result = await contactAPI.getContacts();
-    dispatch(setContacts(result));
-  } catch (error) {
+  } catch (error: any) {
     dispatch(contactFetchError(error));
   } finally {
     dispatch(contactFetchFinished(false));
   }
 };
 
-const deleteContactOperation = contactId => async dispatch => {
+const getContactOperation = () => async (dispatch: Dispatch) => {
+  dispatch(contactFetchStarted(true));
+  try {
+    const result = await contactAPI.getContacts();
+    dispatch(setContacts(result));
+  } catch (error: any) {
+    dispatch(contactFetchError(error));
+  } finally {
+    dispatch(contactFetchFinished(false));
+  }
+};
+
+const deleteContactOperation = (contactId: string) => async (dispatch: Dispatch) => {
   dispatch(contactFetchStarted(true));
   try {
     await contactAPI.deleteContact(contactId);
 
     dispatch(deleteContact(contactId));
-  } catch (error) {
+  } catch (error: any) {
     dispatch(contactFetchError(error));
   } finally {
     dispatch(contactFetchFinished(false));

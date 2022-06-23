@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import shortid from 'shortid';
-// import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import operations from '../../redux/app/operations';
 
 import { Form, Button, Row, Col } from 'react-bootstrap';
@@ -20,7 +20,7 @@ const ContactForm = () => {
     return state.appState.contacts.items;
   });
 
-  const handleChange = evt => {
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = evt.target;
 
     if (evt.currentTarget.name === 'name') {
@@ -31,7 +31,7 @@ const ContactForm = () => {
     }
   };
 
-  const handleSubmit = evt => {
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     const id = shortid.generate();
@@ -47,6 +47,7 @@ const ContactForm = () => {
     }
 
     dispatch(operations.postContactOperation(newContact));
+    // operations.postContactOperation(newContact)
     reset();
   };
 
