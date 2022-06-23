@@ -13,7 +13,7 @@ const contactFetchFinished = createAction<boolean, 'app/contactFetchStart'>('app
 
 const contactFetchError = createAction<string, 'app/contactFetchError'>('app/contactFetchError');
 
-const setFilter = createAction('app/setFilter');
+const setFilter = createAction<string, 'app/setFilter'>('app/setFilter');
 
 const appActions = {
   addContact,

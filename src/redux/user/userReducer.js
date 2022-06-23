@@ -1,6 +1,15 @@
 import { createReducer } from '@reduxjs/toolkit';
 import userActions from '../user/userActions';
 
+import IUser from '../../interfaces/User.interface';
+
+// interface IInitialState {
+//   user: IUser;
+//   token: string | null;
+//   isLoggedIn: boolean;
+//   isLoading: boolean;
+// }
+
 const initialState = {
   user: { name: null, email: null },
   token: null,

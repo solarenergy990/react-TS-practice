@@ -1,13 +1,15 @@
 import axios from 'axios';
+import IUser from '../../interfaces/User.interface'
+import UserState from '../../interfaces/UserSate.interface'
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
-const postRegisteredUser = async registerData => {
+const postRegisteredUser = async (registerData: IUser) => {
   const { data } = await axios.post('/users/signup', registerData);
   return data;
 };
 
-const postLoggedInUser = async loginData => {
+const postLoggedInUser = async (loginData: UserState)=> {
   const { data } = await axios.post('/users/login', loginData);
   return data;
 };
